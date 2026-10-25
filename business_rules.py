@@ -1,4 +1,4 @@
-# Business Rules for Cloudstep Software
+# Business rules for Cloudstep Software
 
 MID_TIER_SEATS = 10
 TOP_TIER_SEATS = 50
