@@ -79,3 +79,48 @@ def test_no_trainer_at_exactly_3000_total():
 
 def test_trainer_just_over_3000_total():
     assert gets_trainer(1, 3000.01) is True
+
+
+# total_licensed
+def test_total_licensed_adds_every_order():
+    orders = [
+        {"company": "A", "seat_price": 40.00, "seats": 5, "education": False},
+        {"company": "B", "seat_price": 400.00, "seats": 9, "education": False},
+    ]
+    assert round(total_licensed(orders), 2) == 3860.00
+
+
+def test_total_licensed_empty_list_is_zero():
+    assert total_licensed([]) == 0.0
+
+
+# largest_license
+def test_largest_license_finds_biggest_total():
+    orders = [
+        {"company": "Small", "seat_price": 40.00, "seats": 5, "education": False},
+        {"company": "Big", "seat_price": 400.00, "seats": 9, "education": False},
+    ]
+    assert largest_license(orders) == "Big"
+
+
+def test_largest_license_tie_returns_first():
+    orders = [
+        {"company": "First", "seat_price": 100.00, "seats": 5, "education": False},
+        {"company": "Second", "seat_price": 100.00, "seats": 5, "education": False},
+    ]
+    assert largest_license(orders) == "First"
+
+
+def test_largest_license_empty_list_is_empty_string():
+    assert largest_license([]) == ""
+
+
+# format_license_line
+def test_format_line_all_no():
+    line = format_license_line("Pine Books", 260, False, False)
+    assert line == "Pine Books: $260.00 | contract review: no | trainer: no"
+
+
+def test_format_line_all_yes():
+    line = format_license_line("Summit College", 6300, True, True)
+    assert line == "Summit College: $6300.00 | contract review: yes | trainer: yes"
